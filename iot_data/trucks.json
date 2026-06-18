@@ -1,0 +1,7 @@
+{
+  "TruckA":{
+    "fuel":60,
+    "temperature":85,
+    "location":"Pune"
+  }
+}

@@ -1,0 +1,10 @@
+fastapi
+langchain
+pypdf
+uvicorn
+langgraph 
+langchain-google-genai 
+scikit-learn 
+numpy
+google-generativeai
+sentence_transformers

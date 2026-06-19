@@ -1,19 +1,27 @@
-# chunking.py
+from pypdf import PdfReader
 
-from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+reader = PdfReader("../manuals/manual.pdf")
 
-loader = PyPDFLoader("../manuals/manual.pdf")
+text = ""
 
-documents = loader.load()
+for page in reader.pages:
+    page_text = page.extract_text()
 
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=50
-)
+    if page_text:
+        text += page_text
 
-chunks = splitter.split_documents(documents)
+chunk_size = 500
+
+chunks = []
+
+for i in range(0, len(text), chunk_size):
+    chunks.append(text[i:i + chunk_size])
 
 print("Total Chunks:", len(chunks))
 
-print(chunks[0].page_content)
+for index, chunk in enumerate(chunks):
+    print("\n")
+    print("=" * 50)
+    print(f"CHUNK {index + 1}")
+    print("=" * 50)
+    print(chunk)

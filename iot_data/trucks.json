@@ -1,7 +1,17 @@
+
+
 {
-  "TruckA":{
-    "fuel":60,
-    "temperature":85,
-    "location":"Pune"
+  "TruckA": {
+    "fuel": 60,
+    "temperature": 105,
+    "location": "Pune",
+    "speed": 65
+  },
+
+  "TruckB": {
+    "fuel": 30,
+    "temperature": 95,
+    "location": "Mumbai",
+    "speed": 72
   }
 }

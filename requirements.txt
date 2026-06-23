@@ -7,4 +7,7 @@ langchain-google-genai
 scikit-learn 
 numpy
 google-generativeai
+python-dotenv
+
 sentence_transformers
+chromadb

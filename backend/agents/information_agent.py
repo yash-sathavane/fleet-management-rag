@@ -27,12 +27,13 @@ embedding_model = GoogleGenerativeAIEmbeddings(
 )
 
 client = chromadb.PersistentClient(
-    path="../chromadb"
+    path=os.path.join(os.path.dirname(__file__), "../chromadb")
 )
 
-collection = client.get_collection(
-    "fleet_manual"
-)
+try:
+    collection = client.get_collection("fleet_manual")
+except Exception:
+    collection = client.get_or_create_collection("fleet_manual")
 
 
 def information_agent(question_or_state):
@@ -40,33 +41,40 @@ def information_agent(question_or_state):
     # Support both State dict (from my graph) and string (direct call/their graph)
     if isinstance(question_or_state, dict):
         question = question_or_state.get("query", question_or_state.get("question", ""))
+        intent = question_or_state.get("intent", "hybrid")
     else:
         question = question_or_state
+        intent = "hybrid"
 
     # IoT Data
-    try:
-        with open("../../iot_data/trucks.json") as file:
-            truck_data = json.load(file)
-    except FileNotFoundError:
+    truck_data = "{}"
+    if intent in ["iot", "hybrid"]:
         try:
-            with open("../iot_data/trucks.json") as file:
+            data_path = os.path.join(os.path.dirname(__file__), "../../iot_data/trucks.json")
+            with open(data_path) as file:
                 truck_data = json.load(file)
-        except Exception:
-            truck_data = "{}"
+        except FileNotFoundError:
+            try:
+                data_path = os.path.join(os.path.dirname(__file__), "../iot_data/trucks.json")
+                with open(data_path) as file:
+                    truck_data = json.load(file)
+            except Exception:
+                truck_data = "{}"
 
     # RAG Search
-    query_embedding = embedding_model.embed_query(
-        question
-    )
-
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=2
-    )
-
-    manual_context = "\n".join(
-        results["documents"][0]
-    )
+    manual_context = "No relevant manual data needed."
+    if intent in ["manual", "hybrid"]:
+        try:
+            query_embedding = embedding_model.embed_query(question)
+            results = collection.query(
+                query_embeddings=[query_embedding],
+                n_results=2
+            )
+            documents = results.get("documents", [])
+            if documents and documents[0]:
+                manual_context = "\n".join(documents[0])
+        except Exception as exc:
+            manual_context = f"No relevant manual data found. ({exc})"
 
     # Build Context
     full_context = f"""
@@ -91,11 +99,16 @@ def information_agent(question_or_state):
     {question}
     """
 
-    response = model.generate_content(
-        prompt
-    )
+    try:
+        response = model.generate_content(prompt)
+        response_text = response.text
+    except Exception as exc:
+        response_text = (
+            "Unable to reach the Gemini API right now. "
+            f"Falling back to local context only. ({exc})"
+        )
 
     if isinstance(question_or_state, dict):
-        return {"response": response.text, "answer": response.text}
+        return {"response": response_text, "answer": response_text}
 
-    return response.text
+    return response_text

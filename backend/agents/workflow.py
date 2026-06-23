@@ -65,7 +65,7 @@ graph = graph_builder.compile()
 response = graph.invoke(
     {
         "question":
-        "Is TruckA temperature normal?"
+        "What is the temperature of TruckA?"
     }
 )
 

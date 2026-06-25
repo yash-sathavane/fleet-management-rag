@@ -15,33 +15,71 @@ model = _load_model()
 
 INTENTS = {
     "manual": """
+    How do I reset the GPS tracker?
+    How do I reconnect the tracker to the fleet dashboard?
+    What is the maintenance schedule for the TitanX 4000?
+    When should the engine oil be changed?
+    When should the air filter be replaced?
+    When should engine diagnostics be performed?
+    What should I check before starting the engine?
+    What is the recommended tyre pressure?
+    What is the normal engine temperature range?
+    What should I do if the fuel level drops below 15%?
+    How can I prevent fuel pump damage?
+    What safety precautions should drivers follow?
+    What is the maximum safe driving speed?
+    What should I do if the IoT dashboard reports a temperature anomaly?
+    What is the fuel capacity of the TitanX 4000?
+    What engine does the TitanX 4000 use?
+
     What is the GVW of the Blazo X 28 Cargo?
-    Explain FuelSmart technology.
-    What warranty is offered with the Blazo X?
+    What is the GVW of the Blazo X 42?
     What engine powers the Blazo X?
+    What is the maximum engine power?
     What is the maximum torque?
-    What gearbox is used?
-    What are the cabin features?
-    What is iMAXX telematics?
-    Compare Blazo truck variants.
     What is the fuel tank capacity?
+    What is the AdBlue tank capacity?
+    What gearbox is used?
+    What suspension system does the Blazo X use?
+    What steering system is provided?
+    What braking system is used?
+    What are the cabin features?
+    What comfort features are available?
+    What safety features are available?
+    What is FuelSmart technology?
+    Explain mPOWER FuelSmart.
+    What is iMAXX telematics?
+    What information is available in the Driver Information System?
+    What warranty does Mahindra provide?
+    What is the Double Service Guarantee?
+    What is MTrust?
+    What is MCover?
+    What is MAashray?
+    What applications is the Blazo X suitable for?
+    Compare the different Blazo X variants.
+    Explain the Blazo truck specifications.
     """,
 
     "iot": """
-    What is TruckA's fuel level?
-    Is TruckB overheating?
+    What is TruckA's current fuel level?
+    What is TruckB's engine temperature?
     Where is TruckA currently located?
-    Show the current speed of TruckB.
+    What is TruckB's current speed?
+    Show the live telemetry for all trucks.
+    Show the current fleet status.
+    Is TruckA overheating?
+    Is TruckB overheating?
     Which truck has the lowest fuel?
-    Which truck is running hot?
-    Show live telemetry for all trucks.
-    What is the current engine temperature?
+    Which truck has the highest engine temperature?
+    Which truck is moving the fastest?
+    Which truck needs immediate attention?
+    Which truck is offline?
+    Show all live sensor readings.
+    Show the current IoT dashboard data.
     """
 }
-
-
-MIN_INTENT_SCORE = 0.25
-HYBRID_DELTA = 0.15
+MIN_INTENT_SCORE = 0.24
+#HYBRID_DELTA = 0.15
 
 
 def get_embedding(text: str):
@@ -138,8 +176,7 @@ def classify_intent(query: str):
         manual_score > MIN_INTENT_SCORE
         and
         iot_score > MIN_INTENT_SCORE
-        and
-        abs(manual_score - iot_score) < HYBRID_DELTA
+       
     ):
         intent = "hybrid"
         print(f"Intent: {intent}")

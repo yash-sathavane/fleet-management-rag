@@ -15,31 +15,32 @@ model = _load_model()
 
 INTENTS = {
     "manual": """
-    How do I reset the GPS tracker?
-    How do I repair a truck component?
-    What is the maintenance procedure?
-    How do I troubleshoot engine issues?
-    How do I troubleshoot overheating if TruckA is running hot?
-    Is TruckA running hot?
-    What are the operating instructions?
-    How do I calibrate sensors?
-    How do I perform maintenance?
-    Vehicle manuals and documentation.
+    What is the GVW of the Blazo X 28 Cargo?
+    Explain FuelSmart technology.
+    What warranty is offered with the Blazo X?
+    What engine powers the Blazo X?
+    What is the maximum torque?
+    What gearbox is used?
+    What are the cabin features?
+    What is iMAXX telematics?
+    Compare Blazo truck variants.
+    What is the fuel tank capacity?
     """,
 
     "iot": """
-    What is the truck fuel level?
-    What is the engine temperature?
-    Where is the truck located?
-    What is the truck status?
-    Is the truck overheating?
-    What are the sensor readings?
-    Live truck telemetry data.
+    What is TruckA's fuel level?
+    Is TruckB overheating?
+    Where is TruckA currently located?
+    Show the current speed of TruckB.
+    Which truck has the lowest fuel?
+    Which truck is running hot?
+    Show live telemetry for all trucks.
+    What is the current engine temperature?
     """
 }
 
 
-MIN_INTENT_SCORE = 0.30 
+MIN_INTENT_SCORE = 0.25
 HYBRID_DELTA = 0.15
 
 

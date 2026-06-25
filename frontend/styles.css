@@ -1,0 +1,140 @@
+/* --------------------------------------------------
+   Global App Styling & Background
+-------------------------------------------------- */
+/* Adds a sleek, very dark gradient background */
+.stApp {
+    background: radial-gradient(circle at top left, #1a1c23, #0d0e12);
+    color: #e2e8f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Constrain width for better readability */
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1200px;
+}
+
+/* Hide Streamlit branding */
+#MainMenu, footer, header {
+    visibility: hidden;
+}
+
+/* --------------------------------------------------
+   Typography & Headers
+-------------------------------------------------- */
+h1, h2, h3 {
+    color: #ffffff !important;
+    letter-spacing: -0.02em;
+}
+
+h1 { font-weight: 800; font-size: 2.5rem; }
+h2 { font-weight: 600; padding-bottom: 0.5rem; border-bottom: 1px solid #2d3748; }
+
+/* --------------------------------------------------
+   Search Box & Inputs
+-------------------------------------------------- */
+[data-testid="stTextInput"] > div > div > input {
+    background-color: #1a202c !important;
+    border: 1px solid #2d3748 !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    padding: 14px !important;
+    font-size: 1.1rem;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+[data-testid="stTextInput"] > div > div > input:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2), inset 0 2px 4px rgba(0,0,0,0.2) !important;
+}
+
+/* Primary Button Styling */
+[data-testid="baseButton-primary"] {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2) !important;
+    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+
+[data-testid="baseButton-primary"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3) !important;
+}
+
+/* --------------------------------------------------
+   Metric Cards (The Dashboard Feel)
+-------------------------------------------------- */
+[data-testid="stMetric"] {
+    background-color: #1e2532 !important;
+    border: 1px solid #2d3748 !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    border-color: #4a5568 !important;
+}
+
+[data-testid="stMetricLabel"] {
+    font-size: 0.9rem !important;
+    color: #a0aec0 !important;
+    font-weight: 500;
+}
+
+[data-testid="stMetricValue"] {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+/* --------------------------------------------------
+   Tabs Styling
+-------------------------------------------------- */
+[data-testid="stTabs"] > div > div {
+    border-bottom: 2px solid #2d3748;
+    gap: 2rem;
+}
+
+[data-testid="stTabs"] button {
+    color: #a0aec0 !important;
+    font-weight: 600 !important;
+    border-bottom-color: transparent !important;
+    padding-bottom: 10px;
+    transition: color 0.2s ease;
+}
+
+[data-testid="stTabs"] button[aria-selected="true"] {
+    color: #6366f1 !important;
+    border-bottom-color: #6366f1 !important;
+}
+
+/* --------------------------------------------------
+   Expanders & DataFrames
+-------------------------------------------------- */
+[data-testid="stExpander"] {
+    background-color: #1a202c !important;
+    border: 1px solid #2d3748 !important;
+    border-radius: 8px !important;
+}
+
+.streamlit-expanderHeader {
+    font-weight: 600 !important;
+    color: #e2e8f0 !important;
+}
+
+/* Alert/Success Boxes */
+[data-testid="stAlert"] {
+    background-color: rgba(48, 190, 165, 0.1) !important;
+    border: 1px solid rgba(48, 190, 165, 0.2) !important;
+    color: #30bea5 !important;
+    border-radius: 10px !important;
+}

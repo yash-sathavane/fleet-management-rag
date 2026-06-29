@@ -727,10 +727,10 @@ def process_source_pdf(
 
 
 def run_ingestion_pipeline() -> None:
-    load_dotenv(BACKEND_DIR / ".env")
+    load_dotenv(".env")
     api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY is missing from backend/.env")
+    # if not api_key:
+    #     raise RuntimeError("GOOGLE_API_KEY is missing from backend/.env")
 
     genai.configure(api_key=api_key)
 

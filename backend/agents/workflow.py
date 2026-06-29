@@ -6,7 +6,7 @@ from langgraph.graph import (
     END
 )
 
-from information_agent import (
+from backend.agents.information_agent import (
     information_agent
 )
 
@@ -66,7 +66,7 @@ graph = graph_builder.compile()
 response = graph.invoke(
     {
         "question":
-        "What is the temperature of TruckA?"
+        "What is a specification of BLAZO X 28 CARGO?"
     }
 )
 

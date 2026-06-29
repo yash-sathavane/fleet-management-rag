@@ -6,7 +6,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
-from graph.state import FleetState
+# from graph.state import FleetStategrp
 
 # ------------------------------------------------------------
 # Configuration
